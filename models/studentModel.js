@@ -1,12 +1,14 @@
 const sequelize = require("../config/db");
 const { DataTypes } = require("sequelize");
+const City = require("../models/cityModel")
 
 //model
-const User = sequelize.define("user", {
-    email: {
-        type: DataTypes.STRING,
+const Student = sequelize.define("student", {
+    id: {
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
+        autoIncrement: true,
     },
 
     fullName: {
@@ -17,12 +19,11 @@ const User = sequelize.define("user", {
         type: DataTypes.INTEGER,
     },
 
-    employed: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-    },
 });
 
 
 
-module.exports = User;
+
+
+
+module.exports = Student;
