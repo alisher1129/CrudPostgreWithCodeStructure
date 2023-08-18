@@ -1,32 +1,33 @@
-const sequelize = require('../config/db'); 
-const Student = require('./studentModel'); 
+const sequelize = require('../config/db');
+const bookModel = require('./bookModel');
+const authorModel = require('./authorModel');
+const studentModel = require('./studentModel');
 const City = require('./cityModel');
 
 (async () => {
   try {
-
     // (ONE-TO-ONE) Relation between user and profile 
-    Student.hasOne(City, {
+    studentModel.hasOne(City, {
       foreignKey: 'studentId',
       as: 'city',
-      onDelete: 'CASCADE'
+      // onDelete: 'CASCADE'
     });
-    City.belongsTo(Student, {
+    City.belongsTo(studentModel, {
       foreignKey: 'studentId',
       as: 'student',
-      onDelete: 'CASCADE'
+      // onDelete: 'CASCADE'
     });
 
 
     // (ONE-TO-MANY) Relation between User and article 
-    // User.hasMany(Article, {
-    //   foreignKey: 'userId',
-    //   as: 'article',
-    // });
-    // Article.belongsTo(User, {
-    //   foreignKey: 'userId',
-    //   as: 'user',
-    // });
+    authorModel.hasMany(bookModel, {
+      foreignKey: 'authorId',
+      as: 'book',
+    });
+    bookModel.belongsTo(authorModel, {
+      foreignKey: 'authorId',
+      as: 'author',
+    });
 
     await sequelize.sync({ force: false }); // This will drop existing tables and create new ones
 

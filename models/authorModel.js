@@ -2,7 +2,7 @@ const sequelize = require("../config/db");
 const { DataTypes } = require("sequelize");
 
 //model
-const Student = sequelize.define("student", {
+const Author = sequelize.define("author", {
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -10,19 +10,11 @@ const Student = sequelize.define("student", {
         autoIncrement: true,
     },
 
-    fullName: {
+    authorName: {
         type: DataTypes.STRING,
-    },
-
-    age: {
-        type: DataTypes.INTEGER,
     },
 
 });
 
 
-
-
-
-
-module.exports = Student;
+module.exports = Author;
