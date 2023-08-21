@@ -12,7 +12,7 @@ route.post("/input", useControl.createStudents);
 route.put("/change/:email", useControl.updateStudents);
 route.delete("/khatam/:email", useControl.deleteStudents);
 
-//students routes
+//students routes (one to one)
 route.get("/student", stControl.getAllStudents);
 route.post("/student", stControl.createStudents);
 route.put("/student/:id", stControl.updateStudents);
@@ -36,6 +36,7 @@ route.get("/book", bControl.getAllBooks);
 route.post("/book", bControl.createBooks);
 route.put("/book/:id", bControl.updateBooks);
 route.delete("/book/:id", bControl.deleteBooks);
+
 
 
 module.exports = route;

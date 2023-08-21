@@ -3,10 +3,13 @@ const bookModel = require('./bookModel');
 const authorModel = require('./authorModel');
 const studentModel = require('./studentModel');
 const City = require('./cityModel');
+const Actor = require('./actorModdel');
+const Movie = require('./movieModel');
+const actorMovieModel = require("./actorMovieModel");
 
 (async () => {
   try {
-    // (ONE-TO-ONE) Relation between user and profile 
+    // (ONE-TO-ONE) Relation between student and City 
     studentModel.hasOne(City, {
       foreignKey: 'studentId',
       as: 'city',
@@ -19,7 +22,7 @@ const City = require('./cityModel');
     });
 
 
-    // (ONE-TO-MANY) Relation between User and article 
+    // (ONE-TO-MANY) Relation between Author and Books 
     authorModel.hasMany(bookModel, {
       foreignKey: 'authorId',
       as: 'book',
@@ -28,6 +31,25 @@ const City = require('./cityModel');
       foreignKey: 'authorId',
       as: 'author',
     });
+
+
+    //(ONE-TO-MANY) Relation between Actors and Movies  
+    Actor.belongsToMany(Movie, {
+      through: 'actor_movie',
+      foreignKey: '',
+      as: 'movie'
+    });
+    Movie.belongsToMany(Actor, {
+      through: 'actor_movie',
+      foreignKey: '',
+      as: 'actor'
+    })
+
+    actorMovieModel.belongsTo(Actor);
+    actorMovieModel.belongsTo(Movie);
+
+
+
 
     await sequelize.sync({ force: false }); // This will drop existing tables and create new ones
 
